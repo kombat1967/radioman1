@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
     @Test
     void shouldNextRadioStation() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
 
-        radio.setCurrentRadioStation(9);
+        radio.setCurrentRadioStation(19);
         radio.next();
         int expected = 0;
         int actual = radio.getCurrentRadioStation();
@@ -20,11 +20,11 @@ class RadioTest {
 
     @Test
     void nextRadioStation() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(20);
 
-        radio.setCurrentRadioStation(8);
+        radio.setCurrentRadioStation(18);
         radio.next();
-        int expected = 9;
+        int expected = 19;
         int actual = radio.getCurrentRadioStation();
 
         assertEquals(expected, actual);
@@ -33,7 +33,19 @@ class RadioTest {
 
     @Test
     void testPrevRadioStation1() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(23);
+
+        radio.setCurrentRadioStation(0);
+        radio.prev();
+        int expected = 22;
+        int actual = radio.getCurrentRadioStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testPrevRadioStation9() {
+        Radio radio = new Radio(11);
 
         radio.setCurrentRadioStation(1);
         radio.prev();
@@ -44,19 +56,8 @@ class RadioTest {
     }
 
     @Test
-    void testPrevRadioStation9() {
-        Radio radio = new Radio();
-
-        radio.setCurrentRadioStation(9);
-        radio.prev();
-        int expected = 8;
-        int actual = radio.getCurrentRadioStation();
-
-        assertEquals(expected, actual);
-    }
-    @Test
     void testSetCurrentRadioStation() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(10);
 
         radio.setCurrentRadioStation(-1);
         //radio.prev();
@@ -68,20 +69,21 @@ class RadioTest {
 
     @Test
     void testSetCurrentRadioStation11() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(11);
 
-        radio.setCurrentRadioStation(10);
+        radio.setCurrentRadioStation(11);
         //radio.prev();
         int expected = 0;
         int actual = radio.getCurrentRadioStation();
 
         assertEquals(expected, actual);
     }
+
     @Test
     void setCurrentVolumeOver10() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(101);
 
         int expected = 0;
         int actual = radio.getCurrentVolume();
@@ -100,14 +102,15 @@ class RadioTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     void shouldSetIncreaseVolume() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(0);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
 
-        int expected = 1;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -117,22 +120,23 @@ class RadioTest {
     void shouldSetIncreaseVolume10() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.increaseVolume();
 
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
 
         assertEquals(expected, actual);
     }
+
     @Test
-    void shouldSetIncreaseVolumeOver10() {
+    void shouldSetIncreaseVolumeOver100() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(101);
         radio.increaseVolume();
 
-        int expected = 10;
+        int expected = 1;
         int actual = radio.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -150,6 +154,7 @@ class RadioTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     void shouldSetDecreaseVolume0() {
         Radio radio = new Radio();
